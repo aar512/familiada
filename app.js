@@ -1,5 +1,28 @@
 "use strict"
 
+//---------------------------------------------------starting view---------------------------------------------------//
+
+let team1 = document.querySelector("#firstTeamName");
+let team2 = document.querySelector("#secondTeamName");
+let createButton = document.querySelector("#createTeams");
+let creatingText = document.querySelector("#creatingText");
+
+createButton.addEventListener("click", () => {
+    if (team1.value === "" || team2.value === "") {
+        creatingText.innerText = "Podaj nazwy drużyn";
+    } else {
+        document.querySelector(".table").style.display = "flex";
+        document.querySelector(".teamCreating").style.display = "none";
+        document.querySelector(".teams").style.display = "block";
+        document.querySelector("#teamOneName").innerText = team1.value;
+        document.querySelector("#teamTwoName").innerText = team2.value;
+    }
+});
+
+
+
+//---------------------------------------------------functionality---------------------------------------------------//
+
 let answers = document.querySelectorAll('[class*="ans"]');
 let points = document.querySelectorAll('[class*="points"]');
 let quizData;
@@ -36,7 +59,7 @@ function ShowPoints(number) {
 }
 
 
-//----------------------------------------------listeners---------------------------------------------------//
+//---------------------------------------------------listeners---------------------------------------------------//
 
 
 //next button

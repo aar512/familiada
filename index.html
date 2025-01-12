@@ -10,8 +10,25 @@
 </head>
 
 <body>
-    <div>
+    <div class="teamCreating">
+        <h2>Stwórz drużyny</h2>
+        <input type="text" id="firstTeamName" placeholder="Nazwa drużyny 1" required>
+        <input type="text" id="secondTeamName" placeholder="Nazwa drużyny 2" required> <br>
+        <button id="createTeams">Dodaj drużyny</button>
+        <p id="creatingText"></p>
+    </div>
 
+    <div class="teams">
+        <div class="teamOne">
+            <h3 id="teamOneName"></h3>
+        </div>
+
+        <div class="teamTwo">
+            <h3 id="teamTwoName"></h3>
+        </div>
+    </div>
+
+    <div class="table">
         <table>
             <tr>
                 <th id="question" colspan="2">Familiada</th>
@@ -40,7 +57,6 @@
 
         <button id="next">Nastepne</button>
         <button id="prev">Poprzednie</button>
-
     </div>
 
 </body>

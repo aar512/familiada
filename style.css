@@ -1,26 +1,35 @@
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-
 body {
     font-family: 'Times New Roman', Times, serif;
     font-size: xx-large;
 }
 
-div {
-    display: flex;
+.teamCreating {
+    text-align: center;
+}
+
+.teams {
+    display: block;
+}
+
+.teamOne {
+    float: left;
+    margin-left: 5%;
+}
+
+.teamTwo {
+    float: right;
+    margin-right: 5%;
+}
+
+.table {
+    /*display: none*/
+    display: none;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     height: 100vh;
     text-align: center;
+    clear: both;
+    /* opacity: 0% to 100%; */
 }
 
 table,
