@@ -15,6 +15,7 @@ body {
     align-items: center;
     height: 100vh;
     text-align: center;
+    /* opacity: 0% to 100%; */
 }
 
 table,
