@@ -7,14 +7,28 @@ body {
     text-align: center;
 }
 
+.teams {
+    display: block;
+}
+
+.teamOne {
+    float: left;
+    margin-left: 5%;
+}
+
+.teamTwo {
+    float: right;
+    margin-right: 5%;
+}
+
 .table {
-    /*display: *none*/
-    display: flex;
+    /*display: none*/
+    display: none;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     height: 100vh;
     text-align: center;
+    clear: both;
     /* opacity: 0% to 100%; */
 }
 
