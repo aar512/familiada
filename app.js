@@ -43,19 +43,81 @@ function ClearAnswers() {
     });
 }
 
+function clearClasses(...elements) {
+    elements.forEach(element => {
+        element.classList.remove("text-hide");
+        element.classList.remove("text-reveal");
+    });
+}
+
 function ShowNextQuestion() {
     const questionData = quizData[`q${currentQuestionIndex + 1}`];
-    question.innerText = questionData.question;
+    const questionElement = document.getElementById('question');
+    questionElement.innerHTML = '';
+
+    questionData.question.split('').forEach((char) => {
+        const span = document.createElement('span');
+        span.innerText = char === ' ' ? '\u00A0' : char;
+        span.style.display = 'inline-block';
+        span.style.visibility = 'hidden';
+        questionElement.appendChild(span);
+    });
+
+    let index = 0;
+    const interval = setInterval(() => {
+        if (index < questionElement.children.length) {
+            questionElement.children[index].style.visibility = 'visible';
+            index++;
+        } else {
+            clearInterval(interval);
+        }
+    }, 25);
 }
 
 function ShowAnswer(number) {
     const questionData = quizData[`q${currentQuestionIndex + 1}`];
     answers[number].innerText = questionData.options[number];
+    answers[number].classList.remove("text-hide");
+    answers[number].classList.add("text-reveal");
+}
+
+function hideAnswer(number) {
+    answers[number].classList.remove("text-reveal");
+    answers[number].classList.add("text-hide");
+
+    answers[number].addEventListener("animationend", () => {
+        answers[number].innerText = "";
+        answers[number].classList.remove("text-hide");
+    }, { once: true });
 }
 
 function ShowPoints(number) {
     const questionData = quizData[`q${currentQuestionIndex + 1}`];
-    points[number].innerText = questionData.points[number];
+    const targetPoints = parseInt(questionData.points[number], 10);
+    let currentPoints = 0;
+
+    const interval = setInterval(() => {
+        if (currentPoints <= targetPoints) {
+            points[number].innerText = currentPoints;
+            currentPoints++;
+        } else {
+            clearInterval(interval);
+        }
+    }, 50);
+}
+
+function hidePoints(number) {
+    let currentPoints = parseInt(points[number].innerText, 10);
+
+    const interval = setInterval(() => {
+        if (currentPoints > 0) {
+            points[number].innerText = currentPoints;
+            currentPoints--;
+        } else {
+            points[number].innerText = "";
+            clearInterval(interval);
+        }
+    }, 50);
 }
 
 
@@ -68,6 +130,7 @@ document.getElementById("next").addEventListener("click", () => {
         currentQuestionIndex++;
         ClearAnswers();
         ShowNextQuestion();
+        clearClasses(...answers);
     }
 });
 
@@ -77,13 +140,14 @@ document.getElementById("prev").addEventListener("click", () => {
         currentQuestionIndex--;
         ClearAnswers();
         ShowNextQuestion();
+        clearClasses(...answers);
     }
 });
 
 // slot 1
 document.querySelector(".answer1").addEventListener("click", () => {
     if (answers[0].innerText !== "") {
-        answers[0].innerText = "";
+        hideAnswer(0);
     } else {
         ShowAnswer(0);
     }
@@ -91,7 +155,7 @@ document.querySelector(".answer1").addEventListener("click", () => {
 
 document.querySelector(".points1").addEventListener("click", () => {
     if (points[0].innerText !== "") {
-        points[0].innerText = "";
+        hidePoints(0);
     } else {
         ShowPoints(0);
     }
@@ -100,7 +164,7 @@ document.querySelector(".points1").addEventListener("click", () => {
 // slot 2
 document.querySelector(".answer2").addEventListener("click", () => {
     if (answers[1].innerText !== "") {
-        answers[1].innerText = "";
+        hideAnswer(1);
     } else {
         ShowAnswer(1);
     }
@@ -108,7 +172,7 @@ document.querySelector(".answer2").addEventListener("click", () => {
 
 document.querySelector(".points2").addEventListener("click", () => {
     if (points[1].innerText !== "") {
-        points[1].innerText = "";
+        hidePoints(1);
     } else {
         ShowPoints(1);
     }
@@ -117,7 +181,7 @@ document.querySelector(".points2").addEventListener("click", () => {
 // slot 3
 document.querySelector(".answer3").addEventListener("click", () => {
     if (answers[2].innerText !== "") {
-        answers[2].innerText = "";
+        hideAnswer(2);
     } else {
         ShowAnswer(2);
     }
@@ -125,7 +189,7 @@ document.querySelector(".answer3").addEventListener("click", () => {
 
 document.querySelector(".points3").addEventListener("click", () => {
     if (points[2].innerText !== "") {
-        points[2].innerText = "";
+        hidePoints(2);
     } else {
         ShowPoints(2);
     }
@@ -134,7 +198,7 @@ document.querySelector(".points3").addEventListener("click", () => {
 // slot 4
 document.querySelector(".answer4").addEventListener("click", () => {
     if (answers[3].innerText !== "") {
-        answers[3].innerText = "";
+        hideAnswer(3);
     } else {
         ShowAnswer(3);
     }
@@ -142,7 +206,7 @@ document.querySelector(".answer4").addEventListener("click", () => {
 
 document.querySelector(".points4").addEventListener("click", () => {
     if (points[3].innerText !== "") {
-        points[3].innerText = "";
+        hidePoints(3);
     } else {
         ShowPoints(3);
     }
@@ -151,7 +215,7 @@ document.querySelector(".points4").addEventListener("click", () => {
 // slot 5
 document.querySelector(".answer5").addEventListener("click", () => {
     if (answers[4].innerText !== "") {
-        answers[4].innerText = "";
+        hideAnswer(4);
     } else {
         ShowAnswer(4);
     }
@@ -159,7 +223,7 @@ document.querySelector(".answer5").addEventListener("click", () => {
 
 document.querySelector(".points5").addEventListener("click", () => {
     if (points[4].innerText !== "") {
-        points[4].innerText = "";
+        hidePoints(4);
     } else {
         ShowPoints(4);
     }
