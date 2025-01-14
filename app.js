@@ -25,8 +25,8 @@ createButton.addEventListener("click", () => {
 });
 
 
-
 //---------------------------------------------------functionality---------------------------------------------------//
+
 
 let answers = document.querySelectorAll('[class*="ans"]');
 let points = document.querySelectorAll('[class*="points"]');
