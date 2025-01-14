@@ -7,6 +7,9 @@ let team2 = document.querySelector("#secondTeamName");
 let createButton = document.querySelector("#createTeams");
 let creatingText = document.querySelector("#creatingText");
 
+document.querySelector("#prev").style.display = "none";
+document.querySelector("#next").style.display = "none";
+
 createButton.addEventListener("click", () => {
     if (team1.value === "" || team2.value === "") {
         creatingText.innerText = "Podaj nazwy drużyn";
@@ -16,12 +19,14 @@ createButton.addEventListener("click", () => {
         document.querySelector(".teams").style.display = "block";
         document.querySelector("#teamOneName").innerText = team1.value;
         document.querySelector("#teamTwoName").innerText = team2.value;
+        document.querySelector("#prev").style.display = "block";
+        document.querySelector("#next").style.display = "block";
     }
 });
 
 
-
 //---------------------------------------------------functionality---------------------------------------------------//
+
 
 let answers = document.querySelectorAll('[class*="ans"]');
 let points = document.querySelectorAll('[class*="points"]');
