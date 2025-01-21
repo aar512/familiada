@@ -9,6 +9,9 @@ let creatingText = document.querySelector("#creatingText");
 
 document.querySelector("#prev").style.display = "none";
 document.querySelector("#next").style.display = "none";
+document.querySelector("#startBlue").style.display = "none";
+document.querySelector("#startRed").style.display = "none";
+document.querySelector("#teamChange").style.display = "none";
 
 createButton.addEventListener("click", () => {
     if (team1.value === "" || team2.value === "") {
@@ -21,6 +24,8 @@ createButton.addEventListener("click", () => {
         document.querySelector("#teamTwoName").innerText = team2.value;
         document.querySelector("#prev").style.display = "block";
         document.querySelector("#next").style.display = "block";
+        document.querySelector("#startBlue").style.display = "block";
+        document.querySelector("#startRed").style.display = "block";
     }
 });
 
@@ -32,6 +37,7 @@ let answers = document.querySelectorAll('[class*="ans"]');
 let points = document.querySelectorAll('[class*="points"]');
 let quizData;
 let currentQuestionIndex = -1;
+let currentTeam = "";
 
 fetch("answers.json")
     .then(response => response.json())
@@ -94,6 +100,15 @@ function hideAnswer(number) {
         answers[number].innerText = "";
         answers[number].classList.remove("text-hide");
     }, { once: true });
+}
+
+function changeTeam() {
+    if (currentTeam === "blue") {
+        currentTeam = "red";
+    } else {
+        currentTeam = "blue";
+    }
+    console.log(currentTeam);
 }
 
 function ShowPoints(number) {
@@ -233,3 +248,23 @@ document.querySelector(".points5").addEventListener("click", () => {
         ShowPoints(4);
     }
 })
+
+document.querySelector("#startBlue").addEventListener("click", () => {
+    document.querySelector("#teamChange").style.display = "block";
+    document.querySelector("#startBlue").style.display = "none";
+    document.querySelector("#startRed").style.display = "none";
+    currentTeam = "red"; //amatorka bo sie wybieralo na odwrot
+    changeTeam();
+})
+
+document.querySelector("#startRed").addEventListener("click", () => {
+    document.querySelector("#teamChange").style.display = "block";
+    document.querySelector("#startBlue").style.display = "none";
+    document.querySelector("#startRed").style.display = "none";
+    currentTeam = "blue"; //amatorka bo sie wybieralo na odwrot
+    changeTeam();
+})
+
+document.querySelector("#teamChange").addEventListener("click", () => {
+    changeTeam();
+});
