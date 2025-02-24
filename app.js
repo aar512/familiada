@@ -20,8 +20,8 @@ createButton.addEventListener("click", () => {
         document.querySelector(".table").style.display = "flex";
         document.querySelector(".teamCreating").style.display = "none";
         document.querySelector(".teams").style.display = "block";
-        document.querySelector("#teamOneName").innerText = team1.value;
-        document.querySelector("#teamTwoName").innerText = team2.value;
+        document.querySelector("#teamOneName").innerText = team1.value + '  ' + teamPoints.blue;
+        document.querySelector("#teamTwoName").innerText = team2.value + '  ' + teamPoints.red;
         document.querySelector("#prev").style.display = "block";
         document.querySelector("#next").style.display = "block";
         document.querySelector("#startBlue").style.display = "block";
@@ -29,15 +29,19 @@ createButton.addEventListener("click", () => {
     }
 });
 
-
 //---------------------------------------------------functionality---------------------------------------------------//
-
 
 let answers = document.querySelectorAll('[class*="ans"]');
 let points = document.querySelectorAll('[class*="points"]');
 let quizData;
 let currentQuestionIndex = -1;
 let currentTeam = "";
+let teamPoints = {
+    blue: 0,
+    red: 0
+};
+
+let pointsAdded = [false, false, false, false, false]
 
 fetch("answers.json")
     .then(response => response.json())
@@ -103,11 +107,23 @@ function hideAnswer(number) {
 }
 
 function changeTeam() {
+    const body = document.body;
+    body.classList.remove("change-background");
+
+    const currentBgColor = getComputedStyle(body).backgroundColor;
+    body.style.setProperty('--current-bg-color', currentBgColor);
+
     if (currentTeam === "blue") {
         currentTeam = "red";
+        body.style.setProperty('--new-bg-color', 'red');
     } else {
         currentTeam = "blue";
+        body.style.setProperty('--new-bg-color', 'blue');
     }
+
+    void body.offsetWidth;
+    body.classList.add("change-background");
+
     console.log(currentTeam);
 }
 
@@ -122,6 +138,16 @@ function ShowPoints(number) {
             currentPoints++;
         } else {
             clearInterval(interval);
+            if (pointsAdded[number] === false) {
+                teamPoints[currentTeam] += targetPoints;
+                console.log(`Team ${currentTeam} points: ${teamPoints[currentTeam]}`);
+                pointsAdded[number] = true;
+
+                document.querySelector("#teamOneName").innerText = team1.value + '  ' + teamPoints.blue;
+                document.querySelector("#teamTwoName").innerText = team2.value + '  ' + teamPoints.red;
+            } else {
+                console.log("Points already added");
+            }
         }
     }, 50);
 }
@@ -140,9 +166,7 @@ function hidePoints(number) {
     }, 50);
 }
 
-
 //---------------------------------------------------listeners---------------------------------------------------//
-
 
 //next button
 document.getElementById("next").addEventListener("click", () => {
@@ -151,6 +175,7 @@ document.getElementById("next").addEventListener("click", () => {
         ClearAnswers();
         ShowNextQuestion();
         clearClasses(...answers);
+        pointsAdded = [false, false, false, false, false];
     }
 });
 
@@ -161,6 +186,7 @@ document.getElementById("prev").addEventListener("click", () => {
         ClearAnswers();
         ShowNextQuestion();
         clearClasses(...answers);
+        pointsAdded = [false, false, false, false, false];
     }
 });
 

@@ -22,9 +22,6 @@ body {
     font-family: Marker Felt, fantasy;
     font-size: xx-large;
     letter-spacing: 2px;
-
-    background-image: url('1.jpg');
-    background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: bottom right;
     background-color: rgb(10, 60, 0, 1.1);
@@ -71,6 +68,7 @@ td {
     border-collapse: collapse;
     height: 30px;
     border-radius: 10px;
+    background-color: rgb(10, 60, 0, 1);
 }
 
 #question {
@@ -146,4 +144,20 @@ input:focus {
 #startRed {
     display: none;
     font-size: x-large;
+}
+
+.teams {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: 100px;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.teamOne {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.teamTwo {
+    grid-area: 1 / 2 / 2 / 3;
 }
