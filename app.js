@@ -275,6 +275,7 @@ document.querySelector("#startBlue").addEventListener("click", () => {
     document.querySelector("#teamChange").style.display = "block";
     document.querySelector("#startBlue").style.display = "none";
     document.querySelector("#startRed").style.display = "none";
+    document.body.style.backgroundColor = "rgb(10, 60, 0, 1.1)";
     currentTeam = "red"; //amatorka bo sie wybieralo na odwrot
     changeTeam();
 })
@@ -283,10 +284,23 @@ document.querySelector("#startRed").addEventListener("click", () => {
     document.querySelector("#teamChange").style.display = "block";
     document.querySelector("#startBlue").style.display = "none";
     document.querySelector("#startRed").style.display = "none";
+    document.body.style.backgroundColor = "rgb(10, 60, 0, 1.1)";
     currentTeam = "blue"; //amatorka bo sie wybieralo na odwrot
     changeTeam();
 })
 
 document.querySelector("#teamChange").addEventListener("click", () => {
     changeTeam();
+});
+
+window.addEventListener("keydown", (event) => {
+    if (event.key === "n") {
+        currentTeam = null
+        document.body.style.backgroundColor = "gray";
+        teamOneName.style.textDecoration = "none";
+        teamTwoName.style.textDecoration = "none";
+        document.querySelector("#startBlue").style.display = "block";
+        document.querySelector("#startRed").style.display = "block";
+        document.querySelector("#teamChange").style.display = "none";
+    }
 });
