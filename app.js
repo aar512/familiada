@@ -42,6 +42,8 @@ let teamPoints = {
 };
 
 let pointsAdded = [false, false, false, false, false]
+let teamOneName = document.querySelector("#teamOneName");
+let teamTwoName = document.querySelector("#teamTwoName");
 
 fetch("answers.json")
     .then(response => response.json())
@@ -107,23 +109,17 @@ function hideAnswer(number) {
 }
 
 function changeTeam() {
-    const body = document.body;
-    body.classList.remove("change-background");
-
-    const currentBgColor = getComputedStyle(body).backgroundColor;
-    body.style.setProperty('--current-bg-color', currentBgColor);
-
     if (currentTeam === "blue") {
         currentTeam = "red";
-        body.style.setProperty('--new-bg-color', 'red');
+        teamOneName.style.textDecoration = "none";
+        teamTwoName.style.textDecoration = "underline";
+        teamTwoName.style.textDecorationThickness = "7px";
     } else {
         currentTeam = "blue";
-        body.style.setProperty('--new-bg-color', 'blue');
+        teamOneName.style.textDecoration = "underline";
+        teamTwoName.style.textDecoration = "none";
+        teamOneName.style.textDecorationThickness = "7px";
     }
-
-    void body.offsetWidth;
-    body.classList.add("change-background");
-
     console.log(currentTeam);
 }
 
