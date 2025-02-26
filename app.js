@@ -175,6 +175,8 @@ document.getElementById("next").addEventListener("click", () => {
         clearClasses(...answers);
         pointsAdded = [false, false, false, false, false];
         roundPoints = 0;
+        document.getElementById("teamOneMistakes").innerHTML = "";
+        document.getElementById("teamTwoMistakes").innerHTML = "";
     }
 });
 
@@ -187,6 +189,8 @@ document.getElementById("prev").addEventListener("click", () => {
         clearClasses(...answers);
         pointsAdded = [false, false, false, false, false];
         roundPoints = 0;
+        document.getElementById("teamOneMistakes").innerHTML = "";
+        document.getElementById("teamTwoMistakes").innerHTML = "";
     }
 });
 
