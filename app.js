@@ -40,7 +40,7 @@ let teamPoints = {
     blue: 0,
     red: 0
 };
-
+let roundPoints = 0;
 let pointsAdded = [false, false, false, false, false]
 let teamOneName = document.querySelector("#teamOneName");
 let teamTwoName = document.querySelector("#teamTwoName");
@@ -135,6 +135,8 @@ function ShowPoints(number) {
         } else {
             clearInterval(interval);
             if (pointsAdded[number] === false) {
+                roundPoints += targetPoints;
+                console.log(`Round points: ${roundPoints}`);
                 teamPoints[currentTeam] += targetPoints;
                 console.log(`Team ${currentTeam} points: ${teamPoints[currentTeam]}`);
                 pointsAdded[number] = true;
@@ -172,6 +174,7 @@ document.getElementById("next").addEventListener("click", () => {
         ShowNextQuestion();
         clearClasses(...answers);
         pointsAdded = [false, false, false, false, false];
+        roundPoints = 0;
     }
 });
 
@@ -183,6 +186,7 @@ document.getElementById("prev").addEventListener("click", () => {
         ShowNextQuestion();
         clearClasses(...answers);
         pointsAdded = [false, false, false, false, false];
+        roundPoints = 0;
     }
 });
 
@@ -302,5 +306,26 @@ window.addEventListener("keydown", (event) => {
         document.querySelector("#startBlue").style.display = "block";
         document.querySelector("#startRed").style.display = "block";
         document.querySelector("#teamChange").style.display = "none";
+    }
+});
+
+window.addEventListener("keydown", (event) => {
+    if (event.key === "b") {
+        teamPoints[currentTeam] += roundPoints;
+        if (currentTeam == "blue") {
+            teamPoints.blue += roundPoints;
+        } else if (currentTeam == "red") {
+            teamPoints.red += roundPoints;
+        }
+    }
+});
+
+window.addEventListener("keydown", (event) => {
+    if (event.key === "x") {
+        if (currentTeam == "blue") {
+            document.getElementById("teamOneMistakes").innerHTML += "&#10008";
+        } else if (currentTeam == "red") {
+            document.getElementById("teamTwoMistakes").innerHTML += "&#10008";
+        }
     }
 });

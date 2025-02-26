@@ -160,3 +160,21 @@ input:focus {
 .teamTwo {
     grid-area: 1 / 2 / 2 / 3;
 }
+
+.mistakes {
+    clear: both;
+}
+
+#teamOneMistakes {
+    color: yellow;
+    font-size: 100px;
+    float: left;
+    margin-left: 5%;
+}
+
+#teamTwoMistakes {
+    color: yellow;
+    font-size: 100px;
+    float: right;
+    margin-right: 5%;
+}
